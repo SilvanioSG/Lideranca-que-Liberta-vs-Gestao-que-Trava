@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Estudo: Liderança que Liberta vs. Gestão que Trava – Guia para líderes e gestores</title>
+    <!-- Font Awesome 6 (profissional) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: rgb(39, 98, 141);
+            --primary-light: rgb(58, 126, 179);
+            --primary-dark: rgb(28, 72, 105);
+            --text-dark: #1e2f3a;
+            --text-muted: #4a5b66;
+            --bg-page: #f4f9fc;
+            --bg-card: #ffffff;
+            --danger: #c44536;
+            --danger-light: #e8d7d4;
+            --success: #2b7a4b;
+            --success-light: #e0f0e6;
+            --warning: #e6a017;
+            --info: #2c6e9e;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-page);
+            color: var(--text-dark);
+            line-height: 1.6;
+            position: relative;
+        }
+
+        /* CABEÇALHO */
+        header {
+            background-color: var(--primary-color);
+            color: #ffffff;
+            padding: 2rem 1rem;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+        }
+
+        .header-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* EFEITO MODERNO NA FOTO */
+        .profile-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #ffffff;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            cursor: pointer;
+        }
+        .profile-img:hover {
+            transform: scale(1.08) rotate(2deg);
+            box-shadow: 0 12px 28px rgba(0,0,0,0.3);
+            border-color: #ffdd99;
+            filter: brightness(1.05) contrast(1.05);
+        }
+
+        .header-text h1 {
+            font-size: 2rem;
+            margin-bottom: 0.25rem;
+            font-weight: 700;
+        }
+
+        .header-text h2 {
+            font-size: 1.1rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+            color: #d9eaf3;
+        }
+
+        .btn-contact {
+            display: inline-flex;
+            align-items: center;
+            background-color: #25D366;
+            color: white;
+            text-decoration: none;
+            padding: 0.55rem 1.4rem;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            gap: 10px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-contact i {
+            font-size: 1.2rem;
+        }
+
+        .btn-contact:hover {
+            background-color: #1da15a;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+        }
+
+        main {
+            max-width: 1000px;
+            margin: 2.5rem auto;
+            padding: 0 1.5rem;
+        }
+
+        /* nota pessoal com hover sutil */
+        .personal-note {
+            background: #eef3f7;
+            padding: 1.8rem 2rem;
+            border-radius: 20px;
+            margin-bottom: 2.5rem;
+            border-left: 6px solid var(--primary-color);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        .personal-note:hover {
+            background: #e8f0f5;
+            transform: translateX(4px);
+            box-shadow: 0 6px 14px rgba(0,0,0,0.05);
+        }
+
+        .framework-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2.5rem;
+        }
+
+        @media (max-width: 720px) {
+            .framework-section {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* CARDS COM EFEITO MODERNO (hover com borda gradiente) */
+        .card {
+            background-color: var(--bg-card);
+            border-radius: 24px;
+            padding: 1.8rem 1.6rem;
+            box-shadow: 0 12px 24px rgba(0,0,0,0.04);
+            transition: all 0.35s cubic-bezier(0.2, 0, 0, 1);
+            border: 1px solid #e2edf2;
+            position: relative;
+            overflow: hidden;
+        }
+        .card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, transparent 0%, rgba(255,255,255,0.1) 50%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.5s;
+            pointer-events: none;
+        }
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 24px 36px -12px rgba(0,0,0,0.2);
+            border-color: transparent;
+            background: linear-gradient(white, white) padding-box,
+                        linear-gradient(135deg, var(--primary-light), var(--success)) border-box;
+            border: 1px solid transparent;
+        }
+        .card-medo:hover::after, .card-lider:hover::after {
+            opacity: 1;
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.2rem;
+            text-align: center;
+            letter-spacing: -0.2px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+        .card-medo h3 { color: var(--danger); }
+        .card-lider h3 { color: var(--success); }
+
+        .trait-list {
+            list-style: none;
+        }
+        .trait-list li {
+            padding: 0.9rem 1rem;
+            margin-bottom: 0.7rem;
+            background-color: #f9fbfd;
+            border-radius: 16px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            border: 1px solid #e9f0f3;
+            transition: all 0.2s ease;
+            cursor: default;
+        }
+        .trait-list li i {
+            width: 24px;
+            font-size: 1.2rem;
+            text-align: center;
+        }
+        .card-medo .trait-list li i {
+            color: var(--danger);
+        }
+        .card-lider .trait-list li i {
+            color: var(--success);
+        }
+        .trait-list li:hover {
+            background-color: #ffffff;
+            transform: translateX(6px);
+            border-color: var(--primary-light);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        /* deep-insight com hover */
+        .deep-insight {
+            background: white;
+            border-radius: 24px;
+            padding: 1.8rem 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.02);
+            border: 1px solid #dde7ec;
+            transition: all 0.3s ease;
+        }
+        .deep-insight:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 30px -12px rgba(39, 98, 141, 0.12);
+            border-color: var(--primary-light);
+        }
+
+        .two-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 0.8rem;
+        }
+        .alert-box, .action-box {
+            background: #fef8e7;
+            padding: 1.2rem;
+            border-radius: 20px;
+            transition: all 0.25s;
+        }
+        .action-box {
+            background: #eafaf1;
+        }
+        .alert-box:hover, .action-box:hover {
+            transform: scale(1.01);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.04);
+        }
+
+        .micro-list {
+            padding-left: 1.2rem;
+            margin-top: 0.5rem;
+        }
+        .micro-list li {
+            margin: 0.5rem 0;
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+            transition: transform 0.1s;
+        }
+        .micro-list li:hover {
+            transform: translateX(3px);
+        }
+
+        .reflection-block {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #1f5e87 100%);
+            color: white;
+            padding: 2.8rem 2rem;
+            border-radius: 28px;
+            text-align: center;
+            font-size: 1.35rem;
+            font-weight: 600;
+            line-height: 1.4;
+            margin: 2.5rem 0;
+            box-shadow: 0 10px 22px rgba(0,0,0,0.1);
+            transition: all 0.35s;
+        }
+        .reflection-block:hover {
+            transform: scale(1.01);
+            box-shadow: 0 20px 30px -8px rgba(0,0,0,0.25);
+            background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary-dark) 100%);
+        }
+
+        .daily-guide {
+            background: #fffcf0;
+            border-left: 5px solid var(--warning);
+            padding: 1.6rem 2rem;
+            border-radius: 20px;
+            margin: 2rem 0;
+            transition: all 0.3s;
+        }
+        .daily-guide:hover {
+            background: #fff9e6;
+            transform: translateX(5px);
+            box-shadow: 0 12px 20px rgba(0,0,0,0.05);
+        }
+
+        /* bloco de autorreflexão com transição */
+        .self-check {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 1.8rem;
+            margin-top: 1.5rem;
+            border: 1px solid #d8e3ea;
+            transition: all 0.3s;
+        }
+        .self-check:hover {
+            border-color: var(--primary-light);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.05);
+            transform: translateY(-3px);
+        }
+
+        /* plano 30 dias */
+        .plan-card {
+            background: #eef2f5;
+            border-radius: 24px;
+            padding: 1.8rem;
+            margin: 2rem 0;
+            transition: all 0.3s;
+        }
+        .plan-card:hover {
+            background: #e8edf1;
+            transform: translateY(-4px);
+            box-shadow: 0 18px 28px -10px rgba(0,0,0,0.1);
+        }
+        .plan-steps {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .step-item {
+            flex: 1;
+            min-width: 200px;
+            background: white;
+            border-radius: 20px;
+            padding: 1rem;
+            transition: all 0.25s;
+        }
+        .step-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+            background: #fefefe;
+        }
+
+        /* botão voltar ao topo */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--primary-color);
+            color: white;
+            width: 52px;
+            height: 52px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 1.5rem;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.25);
+            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            opacity: 0;
+            visibility: hidden;
+            z-index: 1000;
+            border: none;
+            cursor: pointer;
+        }
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        .back-to-top:hover {
+            background-color: var(--primary-light);
+            transform: translateY(-6px) scale(1.05);
+            box-shadow: 0 12px 22px rgba(0,0,0,0.3);
+        }
+
+        footer {
+            background: #1a2c38;
+            color: #bcd0da;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+            transition: background 0.2s;
+        }
+        footer a {
+            color: #f0f9ff;
+            text-decoration: none;
+            border-bottom: 1px dotted;
+            transition: color 0.2s;
+        }
+        footer a:hover {
+            color: white;
+            border-bottom-color: white;
+        }
+
+        @media (max-width: 600px) {
+            .two-columns { grid-template-columns: 1fr; }
+            .header-text h1 { font-size: 1.5rem; }
+            .back-to-top { width: 44px; height: 44px; bottom: 20px; right: 20px; }
+            .profile-img:hover { transform: scale(1.05); }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <img src="Executivo_Silvanio_Gestor.PNG" alt="Silvanio Gois" class="profile-img" id="profileImage">
+            <div class="header-text">
+                <h1>Liderança que Liberta x Gestão que Trava</h1>
+                <h2>Silvanio Gois – para quem lidera gente de verdade</h2>
+                <a href="https://wa.me/5513988301094" target="_blank" class="btn-contact">
+                    <i class="fab fa-whatsapp"></i> Contato
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="personal-note">
+            <p><i class="fas fa-heart" style="color: var(--primary-color); margin-right: 8px;"></i> <strong>Olá, gestor, gestora.</strong> Escrevo isso de coração aberto, baseado no que tenho visto dentro de empresas, reuniões de diretoria e no dia a dia de times que poderiam render o dobro se não fosse um detalhe incômodo: a insegurança de quem lidera.</p>
+            <p>Não é raro encontrar um gestor tecnicamente brilhante, mas que, no fundo, <strong>tem medo de ser ofuscado</strong>. Ele contrata pessoas boas, mas, quando elas tentam brilhar, ele coloca barreiras. Silencia ideias, centraliza decisões, microgerencia. Resultado? O talento adoece, pede demissão ou simplesmente desaprende a pensar.</p>
+            <p>Já o líder facilitador entende algo simples: <strong>seu valor não está em saber todas as respostas, mas em criar um ambiente onde as respostas apareçam</strong>. Ele não bloqueia – ele remove pedras do caminho. Esse estudo é um convite para olharmos para dentro e respondermos: meu estilo de gestão está gerando movimento ou paralisia?</p>
+        </div>
+
+        <div class="framework-section">
+            <div class="card card-medo">
+                <h3><i class="fas fa-shield-alt"></i> Gestor Movido Pelo Medo</h3>
+                <ul class="trait-list">
+                    <li><i class="fas fa-crown"></i> Prioriza o ego – precisa ser o dono da verdade</li>
+                    <li><i class="fas fa-eye-slash"></i> Teme o ofuscamento – se um subordinado recebe elogios, sente-se ameaçado</li>
+                    <li><i class="fas fa-ban"></i> Bloqueia soluções – corta iniciativas que não partiram dele</li>
+                    <li><i class="fas fa-hourglass-half"></i> Cria inação – equipe espera ordens e evita sugerir</li>
+                </ul>
+                <p style="margin-top: 1rem; font-size: 0.85rem; color: #6c757d; text-align: center;"><i class="fas fa-chart-line"></i> Sinais: reuniões longas, silêncio nos feedbacks, alta rotatividade.</p>
+            </div>
+            <div class="card card-lider">
+                <h3><i class="fas fa-hand-sparkles"></i> Líder Facilitador</h3>
+                <ul class="trait-list">
+                    <li><i class="fas fa-rocket"></i> Prioriza a execução – o que importa é o time vencer</li>
+                    <li><i class="fas fa-chalkboard-user"></i> Capacita o talento – ensina, delega, confere autonomia</li>
+                    <li><i class="fas fa-door-open"></i> Viabiliza soluções – remove burocracias, abre portas</li>
+                    <li><i class="fas fa-chart-simple"></i> Impulsiona resultados – o time entrega mais porque é ouvido</li>
+                </ul>
+                <p style="margin-top: 1rem; font-size: 0.85rem; color: #2b7a4b; text-align: center;"><i class="fas fa-comments"></i> Como age: pergunta “Como posso ajudar?” e age rápido.</p>
+            </div>
+        </div>
+
+        <div class="deep-insight">
+            <h4><i class="fas fa-magnifying-glass-chart"></i> Como identificar o que está acontecendo na sua equipe (sem autoengano)</h4>
+            <div class="two-columns">
+                <div class="alert-box">
+                    <p><i class="fas fa-triangle-exclamation" style="color: var(--danger); margin-right: 8px;"></i> <strong>Se você se identifica com qualquer item abaixo, o medo pode estar no volante:</strong></p>
+                    <ul class="micro-list">
+                        <li><i class="fas fa-check-circle" style="color: var(--danger);"></i> Você revisa e altera tarefas simples feitas por sua equipe.</li>
+                        <li><i class="fas fa-check-circle" style="color: var(--danger);"></i> Evita passar crédito público para as ideias dos outros.</li>
+                        <li><i class="fas fa-check-circle" style="color: var(--danger);"></i> Sente um incômodo quando alguém resolve um problema sem te consultar.</li>
+                        <li><i class="fas fa-check-circle" style="color: var(--danger);"></i> Suas reuniões giram em torno do que você pensa, raramente escuta propostas.</li>
+                        <li><i class="fas fa-check-circle" style="color: var(--danger);"></i> O time parece “desligado” e raramente traz novidades.</li>
+                    </ul>
+                </div>
+                <div class="action-box">
+                    <p><i class="fas fa-seedling" style="color: var(--success); margin-right: 8px;"></i> <strong>Atitudes pequenas que qualquer líder pode aplicar amanhã mesmo:</strong></p>
+                    <ul class="micro-list">
+                        <li><i class="fas fa-check-circle" style="color: var(--success);"></i> Comece uma reunião semanal com: “Qual foi a melhor ideia que alguém da equipe teve essa semana?”</li>
+                        <li><i class="fas fa-check-circle" style="color: var(--success);"></i> Delegue uma decisão importante que antes você tomava sozinho.</li>
+                        <li><i class="fas fa-check-circle" style="color: var(--success);"></i> Quando alguém trouxer uma sugestão, diga: “O que você precisa de mim para colocar isso em prática?”</li>
+                        <li><i class="fas fa-check-circle" style="color: var(--success);"></i> Dê reconhecimento público para uma solução criada por outro membro.</li>
+                        <li><i class="fas fa-check-circle" style="color: var(--success);"></i> Pergunte individualmente: “O que eu faço que atrapalha seu trabalho?”</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div style="margin: 2rem 0;">
+            <h3 style="color: var(--primary-color); font-size: 1.5rem; margin-bottom: 1rem;"><i class="fas fa-brain"></i> O gestor movido pelo medo: o que acontece nos bastidores?</h3>
+            <p>Já vi líderes travarem uma modernização simples porque tinham receio de que “o analista soubesse mais de tecnologia do que eles”. O resultado: a equipe perdeu o entusiasmo, o projeto atrasou, e o analista saiu três meses depois. O medo gera um ciclo silencioso: o líder centraliza, o time se acomoda, a inovação morre, os melhores profissionais vazam. E o pior: o líder nem percebe que o prejuízo é maior para ele mesmo – pois deixa de entregar resultados estratégicos e fica sobrecarregado com tarefas operacionais.</p>
+            <p style="margin-top: 0.8rem;">Se você reconhece esse padrão, não se culpe. Muitos de nós crescemos em ambientes onde “mandar” era sinônimo de poder. A boa notícia: dá para mudar com escolhas diárias pequenas, mas consistentes.</p>
+        </div>
+
+        <div style="margin: 2rem 0;">
+            <h3 style="color: var(--success); font-size: 1.5rem; margin-bottom: 1rem;"><i class="fas fa-leaf"></i> O líder facilitador: como ele pensa e age na prática?</h3>
+            <p>A líder facilitadora não tem medo de contratar gente mais capacitada que ela. Pelo contrário: busca gente assim propositalmente. Em uma situação de crise, a primeira pergunta que faz não é “quem errou?” mas “o que precisamos para resolver?”. Ela entende que o papel da liderança é arquitetar o palco, não atuar todos os papéis. No cotidiano, isso aparece em ações simples: disponibilizar orçamento para um curso que um funcionário pediu, defender a ideia de um assistente na reunião da diretoria, dar autonomia para um novo projeto sem sufocar com checkpoints excessivos.</p>
+            <p style="margin-top: 0.8rem;">E o mais bonito: quando o time é habilitado, o próprio líder se torna mais leve. A ansiedade diminui, os resultados aparecem e ainda sobra energia para pensar no futuro, em vez de apagar incêndios.</p>
+        </div>
+
+        <div class="daily-guide">
+            <h4><i class="fas fa-lightbulb"></i> Caso (para refletir) – “O talento que quase foi embora”</h4>
+            <p>Na empresa Beta, a diretora de marketing, muito competente, tinha o hábito de refazer todos os textos da equipe. Até que uma redatora sênior entregou uma campanha potente, mas a diretora alterou quase todo o conteúdo. O resultado foi um anúncio sem alma e performance abaixo da média. A redatora, frustrada, começou a enviar currículos. Quando a diretora percebeu que perderia sua melhor profissional, decidiu mudar: pediu desculpas publicamente, passou a revisar sugerindo, não reescrevendo. Em três meses, o time dobrou a produção de ideias criativas, e a redatora virou líder do setor. A mudança de postura salvou o time e a carreira da diretora.</p>
+            <p><strong>Reflexão pessoal:</strong> Você está disposto a ceder o controle para ganhar resultado e respeito?</p>
+        </div>
+
+        <div class="reflection-block">
+            <i class="fas fa-question-circle" style="font-size: 2rem; display: block; margin-bottom: 1rem;"></i>
+            Estará a sua equipe sendo habilitada para resolver problemas ou sendo encurralada pelos seus gestores? <br>
+            <span style="font-size: 1rem; font-weight: normal;">Pause 2 minutos. Feche os olhos e pense na última semana: quantas vezes você disse “faça do seu jeito” vs. “faça como eu mando”?</span>
+        </div>
+
+        <div class="self-check">
+            <h4 style="display: flex; gap: 12px; align-items: center;"><i class="fas fa-clipboard-list"></i> Roteiro de autorreflexão para líderes e gestores (responda com honestidade)</h4>
+            <ul style="margin-top: 1rem; list-style-type: none;">
+                <li style="margin-bottom: 1rem;"><i class="fas fa-question-circle" style="color: var(--primary-color); width: 24px;"></i> 1. Meus liderados trazem problemas não solicitados? Ou só trazem quando já está grave?</li>
+                <li style="margin-bottom: 1rem;"><i class="fas fa-question-circle" style="color: var(--primary-color);"></i> 2. Consigo lembrar de pelo menos três ideias implementadas que partiram da equipe nos últimos 60 dias?</li>
+                <li style="margin-bottom: 1rem;"><i class="fas fa-question-circle" style="color: var(--primary-color);"></i> 3. Quando um liderado acerta, eu divido o mérito abertamente ou inconscientemente puxo para mim?</li>
+                <li style="margin-bottom: 1rem;"><i class="fas fa-question-circle" style="color: var(--primary-color);"></i> 4. Existe alguma decisão de baixo risco que eu ainda não deleguei por puro hábito de controle?</li>
+                <li style="margin-bottom: 1rem;"><i class="fas fa-question-circle" style="color: var(--primary-color);"></i> 5. O clima da minha equipe é de “esperar autorização” ou “tentar, errar e aprender”?</li>
+            </ul>
+            <p style="margin-top: 0.5rem; font-style: italic;"><i class="fas fa-arrow-right"></i> Se mais de duas respostas te incomodaram, é um sinal claro: você pode começar uma transição suave para uma liderança mais facilitadora.</p>
+        </div>
+
+        <div class="plan-card">
+            <h4 style="color: var(--primary-color);"><i class="fas fa-calendar-alt"></i> Plano de 30 dias: da gestão por medo à liderança que habilita</h4>
+            <div class="plan-steps">
+                <div class="step-item">
+                    <strong><i class="fas fa-search"></i> Semana 1 – Diagnóstico silencioso</strong>
+                    <p style="margin-top: 0.5rem; font-size: 0.9rem;">Observe sem julgamento: anote quantas vezes você interrompeu alguém, quantas vezes pediu opinião. Não mude ainda, apenas registre.</p>
+                </div>
+                <div class="step-item">
+                    <strong><i class="fas fa-hand-peace"></i> Semana 2 – Pequenas delegações</strong>
+                    <p style="margin-top: 0.5rem; font-size: 0.9rem;">Escolha uma tarefa e repasse com autonomia total. Diga: “Você decide, eu confio”.</p>
+                </div>
+                <div class="step-item">
+                    <strong><i class="fas fa-comment-dots"></i> Semana 3 – Feedback de coragem</strong>
+                    <p style="margin-top: 0.5rem; font-size: 0.9rem;">Pergunte a cada membro: “O que posso fazer para tornar seu trabalho mais produtivo?”. Implemente três melhorias.</p>
+                </div>
+                <div class="step-item">
+                    <strong><i class="fas fa-trophy"></i> Semana 4 – Celebração de autonomia</strong>
+                    <p style="margin-top: 0.5rem; font-size: 0.9rem;">Reconheça publicamente uma iniciativa de um liderado. Crie um prêmio simbólico para a melhor tentativa.</p>
+                </div>
+            </div>
+            <p style="margin-top: 1.2rem; font-size: 0.95rem;"><i class="fas fa-check-double"></i> Pequenos gestos de confiança geram comprometimento e ideias inovadoras que você nem imaginava.</p>
+        </div>
+
+        <div style="margin: 2rem 0 1rem; padding: 0.5rem;">
+            <p style="font-size: 1.1rem; border-left: 4px solid var(--primary-light); padding-left: 1rem;"><i class="fas fa-quote-left" style="margin-right: 8px; color: var(--primary-light);"></i> <strong>Lembre-se:</strong> um líder que teme ser ofuscado acaba num palco solitário, sem plateia. Um líder que capacita constrói um ecossistema onde todos ganham – inclusive ele. A escolha é diária.</p>
+        </div>
+    </main>
+
+    <footer>
+        <p><i class="far fa-copyright"></i> 2026 Silvanio Gois – Da estratégia à operação, conectando, processos, pessoas e resultados.</p>
+        <p><a href="https://www.silvaniogois.com.br/" target="_blank"><i class="fas fa-globe"></i> Conheça mais reflexões no site →</a> | Compartilhe com quem lidera times</p>
+    </footer>
+
+    <button class="back-to-top" id="backToTopBtn" aria-label="Voltar ao topo">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const profileImage = document.getElementById('profileImage');
+            if(profileImage) {
+                profileImage.addEventListener('error', function() {
+                    this.src = 'https://via.placeholder.com/120/27628d/ffffff?text=SG';
+                });
+            }
+
+            const backBtn = document.getElementById('backToTopBtn');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 400) {
+                    backBtn.classList.add('visible');
+                } else {
+                    backBtn.classList.remove('visible');
+                }
+            });
+            backBtn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            // Interatividade sutil nos cards (sem alert)
+            const listItems = document.querySelectorAll('.trait-list li');
+            listItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    const card = this.closest('.card');
+                    const isMedo = card && card.classList.contains('card-medo');
+                    this.style.transition = '0.1s';
+                    this.style.backgroundColor = 'var(--primary-light)';
+                    this.style.color = 'white';
+                    setTimeout(() => {
+                        this.style.backgroundColor = '';
+                        this.style.color = '';
+                    }, 300);
+                    if(isMedo) {
+                        console.log("Reflexão: Que tal transformar um medo em delegação amanhã?");
+                    } else {
+                        console.log("Inspiração: Você já reconheceu uma ideia da sua equipe hoje?");
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
